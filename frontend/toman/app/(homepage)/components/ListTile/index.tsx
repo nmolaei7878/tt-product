@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import { ProductDto } from '../../query/product/types';
 
@@ -9,23 +8,62 @@ interface Props {
 }
 
 const ListTile: React.FC<Props> = ({ product }) => {
-  const router = useRouter();
-
-  function navigateToDetailPage() {
-    router.push(`/${product.id}`);
-  }
+  const statusColor =
+    product.status === 'active'
+      ? 'bg-green-100 text-green-700 border border-green-300'
+      : 'bg-red-100 text-red-700 border border-red-300';
 
   return (
-    <>
-      <div
-        onClick={navigateToDetailPage}
-        className="w-44 h-44 relative group cursor-pointer mt-2"
-      >
-        <div className="hidden p-4 group-hover:block absolute bottom-0 left-0 w-full h-1/3 z-20 rounded-3xl bg-slate-500 opacity-70">
-          <p className="text-sm text-white">{product.productName}</p>
+    <div className="rounded-2xl shadow-sm border border-neutral-200 bg-white overflow-hidden">
+      <div className="p-4 space-y-3">
+        <div className="flex justify-between items-start">
+          <div className="font-semibold text-lg leading-tight">
+            {product.productName}
+          </div>
+
+          <span className={`text-xs px-2 py-1 rounded-lg ${statusColor}`}>
+            {product.status}
+          </span>
+        </div>
+
+        <div className="text-sm grid grid-cols-2 gap-y-1">
+          <div className="opacity-60">SKU:</div>
+          <div className="font-medium">{product.sku}</div>
+
+          <div className="opacity-60">Category:</div>
+          <div className="font-medium">{product.category}</div>
+        </div>
+
+        {product.description && (
+          <p className="text-sm opacity-80 line-clamp-2">
+            {product.description}
+          </p>
+        )}
+
+        <div className="grid grid-cols-2 gap-3 pt-2">
+          <div className="p-3 bg-blue-50 rounded-xl border border-blue-200 flex flex-col">
+            <span className="text-xs opacity-70">Price</span>
+            <span className="text-base font-semibold text-blue-700">
+              ${product.price}
+            </span>
+          </div>
+
+          <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 flex flex-col">
+            <span className="text-xs opacity-70">Cost Price</span>
+            <span className="text-base font-semibold text-amber-700">
+              ${product.costPrice}
+            </span>
+          </div>
+
+          <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 flex flex-col col-span-2">
+            <span className="text-xs opacity-70">Stock Quantity</span>
+            <span className="text-base font-semibold text-emerald-700">
+              {product.stockQuantity}
+            </span>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
