@@ -1,4 +1,3 @@
-import CategoryFilter from './CategoryFilter';
 import PriceRangeFilter from './PriceRangeFilter';
 import SearchFilter from './SearchFilter';
 import StatusFilter from './StatusFilter';
@@ -9,7 +8,6 @@ const Filters = () => {
     <>
       <SearchFilter />
       <StatusFilter />
-      <CategoryFilter categories={['Active', 'Inactive', 'Discontinued']} />
 
       <div className="flex gap-2">
         <PriceRangeFilter type="minPrice" />
