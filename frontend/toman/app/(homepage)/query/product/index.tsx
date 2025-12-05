@@ -24,7 +24,7 @@ export const useFetchProductsInfinite = (
   filters: Omit<ProductPayload, 'page'>
 ) => {
   return useInfiniteQuery<ProductResponseDto, ErrorResponse>({
-    queryKey: ['products', filters],
+    queryKey: ['products', JSON.stringify(filters)],
     initialPageParam: 1,
     queryFn: ({ pageParam = 1 }) =>
       fetchProducts({ ...filters, page: pageParam as number }),

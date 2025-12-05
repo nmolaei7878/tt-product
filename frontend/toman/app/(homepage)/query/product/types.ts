@@ -57,13 +57,12 @@ function mapProduct(raw: any): ProductDto {
 }
 
 export function mapProductResponseDto(response: any): ProductResponseDto {
+  const body = response.data;
   return {
-    data: Array.isArray(response.data.data)
-      ? response.data.data.map(mapProduct)
-      : [],
-    hasMore: response.hasMore,
-    limit: response.limit,
-    page: response.page,
-    total: response.total,
+    data: Array.isArray(body.data) ? body.data.map(mapProduct) : [],
+    hasMore: body.hasMore,
+    limit: body.limit,
+    page: body.page,
+    total: body.total,
   };
 }
