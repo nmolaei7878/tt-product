@@ -11,7 +11,7 @@ export async function fetchProducts(
   payload: ProductPayload
 ): Promise<ProductResponseDto> {
   try {
-    const res = await axiosClient.get('http://localhost:3001/api/products', {
+    const res = await axiosClient.get('/api/products', {
       params: { ...payload },
     });
 
