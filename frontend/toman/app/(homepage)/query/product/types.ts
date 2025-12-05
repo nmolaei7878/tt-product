@@ -58,7 +58,9 @@ function mapProduct(raw: any): ProductDto {
 
 export function mapProductResponseDto(response: any): ProductResponseDto {
   return {
-    data: Array.isArray(response.data) ? response.data.map(mapProduct) : [],
+    data: Array.isArray(response.data.data)
+      ? response.data.data.map(mapProduct)
+      : [],
     hasMore: response.hasMore,
     limit: response.limit,
     page: response.page,

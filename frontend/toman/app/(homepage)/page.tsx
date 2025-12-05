@@ -1,13 +1,16 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Filters from './components/Filters';
 import ListTile from './components/ListTile';
+import { useProductFilters } from './hooks/useProductFilters';
 import { useFetchProductsInfinite } from './query/product';
 
 export default function HomePage() {
-  const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    useFetchProductsInfinite({ limit: 20 });
+  const filters = useProductFilters();
+  const { data, fetchNextPage, isFetchingNextPage, hasNextPage, error } =
+    useFetchProductsInfinite({ ...filters, limit: 20 });
 
-  const loadMoreRef = useRef(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!loadMoreRef.current) return;
@@ -24,21 +27,23 @@ export default function HomePage() {
 
   const products = data?.pages.flatMap((p) => p.data) || [];
 
+  if (error) {
+    console.log(error);
+  }
+
   return (
-    <div className="p-4 space-y-4 max-w-md mx-auto">
-      {products.map((p) => (
-        <div key={p.id} className="rounded-2xl shadow-sm">
-          <ListTile product={p} />
-        </div>
-      ))}
+    <div className="max-w-md mx-auto space-y-4 p-2">
+      <Filters />
+
+      <div className="grid grid-cols-2 gap-2">
+        {products.map((p) => (
+          <ListTile key={p.id} product={p} />
+        ))}
+      </div>
 
       <div ref={loadMoreRef} className="flex justify-center p-4">
-        {isFetchingNextPage && (
-          <span className="opacity-60 text-sm">Loading...</span>
-        )}
-        {!hasNextPage && (
-          <span className="opacity-60 text-sm">No more products</span>
-        )}
+        {isFetchingNextPage && <span>Loading...</span>}
+        {!hasNextPage && <span>No more products</span>}
       </div>
     </div>
   );
