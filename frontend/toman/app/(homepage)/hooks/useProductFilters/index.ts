@@ -2,7 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 import { StatusType } from '../../components/Filters/StatusFilter';
-import { ProductPayload } from '../../query/product/types';
+import { ProductPayload } from '../../query/get-product/types';
 
 export const useProductFilters = (): ProductPayload => {
   const searchParams = useSearchParams();

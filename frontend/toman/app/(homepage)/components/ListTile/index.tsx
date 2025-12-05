@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ProductDto } from '../../query/product/types';
+import { ProductDto } from '../../query/get-product/types';
 
 interface Props {
   product: ProductDto;

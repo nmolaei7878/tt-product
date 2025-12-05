@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import Filters from './components/Filters';
 import ListTile from './components/ListTile';
 import { useProductFilters } from './hooks/useProductFilters';
-import { useFetchProductsInfinite } from './query/product';
+import { useFetchProductsInfinite } from './query/get-product';
 
 export default function HomePage() {
   const filters = useProductFilters();
