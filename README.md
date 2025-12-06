@@ -1,12 +1,3 @@
-# Next.js Modular Application
-
-## Overview
-
-This project is a modular Next.js 16 application built with modern tools
-such as TypeScript, TanStack Query, Tailwind CSS v4, ShadCN, and more.
-The architecture emphasizes clean separation, code splitting, and
-maintainable components.
-
 ## Installation
 
 After cloning the repository, navigate to the root folder and run:
@@ -18,44 +9,40 @@ npm run start
 
 > you will need nodejs installed on your computer
 
-## Architecture
+## Structure (homepage)
 
 The project follows a fully modular folder structure. Any query,
 component, hook, or validation schema related to a specific feature is
 placed next to its own page. This improves discoverability and prevents
 scattered files.
 
+- UI components
+- Query + Async API functions
+- Zod schemas
+- Custom hooks
+- Types & mappers
+- Local utils
+- i18n
+
 ### Global Layer (`shared/`)
 
-This folder contains: - Global configs\
+This folder contains:
 
-- Error handling utilities\
-- Reusable hooks\
+- Global configs
+- Error handling utilities
+- Reusable hooks
+- Reusable components
 - Wrappers and providers used across the entire application
-
-### Home Page Features
-
-The homepage includes:
-
-- Infinite Pagination
-- Multi‑filter system
-- Category selection
-- URL‑based state persistence
-
-All filter states are stored in URL search params. TanStack Query
-listens for URL param changes using a custom hook (`useProductFilters`).
-Whenever filters change, a new API call is triggered automatically.
 
 ## Query Layer
 
 Each feature has:
 
-- An async function responsible for Axios API calls
+- An async function responsible for Axios API calls and Map incoming response data or Map into custom Readable Error type
 
-- A React Query hook that wraps the async request
-- A component layer consuming the hook
+- An Abstraction Layer Around React Query hook that wraps the async request
 
-### Data Mapping
+#### Data Mapping
 
 Inside the async function, server responses pass through a mapper
 located in `types/`.\
