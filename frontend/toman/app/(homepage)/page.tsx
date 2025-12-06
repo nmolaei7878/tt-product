@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import { toast } from 'sonner';
+import CategoryList from './components/CategoryList';
 import CreateProductDialog from './components/CreateProduct';
 import Filters from './components/Filters';
 import ListTile from './components/ListTile';
@@ -30,27 +31,32 @@ export default function HomePage() {
   const products = data?.pages.flatMap((p) => p.data) || [];
 
   if (error) {
-    console.log(error);
-
     toast.error(error.data.error ?? 'Error Occured');
   }
 
   return (
-    <div className="max-w-xl mx-auto space-y-4 p-2">
-      <CreateProductDialog />
-      <Filters />
+    <div className="flex gap-4 p-4">
+      <div className="flex-1 max-w-xl space-y-4">
+        <Filters />
 
-      <div className="grid grid-cols-2 gap-2">
-        {products.map((p) => (
-          <div key={p.id}>
-            <ListTile product={p} />
-          </div>
-        ))}
+        <div className="grid grid-cols-2 gap-2">
+          {products.map((p) => (
+            <div key={p.id}>
+              <ListTile product={p} />
+            </div>
+          ))}
+        </div>
+
+        <div ref={loadMoreRef} className="flex justify-center p-4">
+          {isFetchingNextPage && <span>Loading...</span>}
+          {!hasNextPage && <span>No more products</span>}
+        </div>
       </div>
 
-      <div ref={loadMoreRef} className="flex justify-center p-4">
-        {isFetchingNextPage && <span>Loading...</span>}
-        {!hasNextPage && <span>No more products</span>}
+      {/* RIGHT SIDE – CATEGORIES */}
+      <div className="w-64">
+        <CategoryList />
+        <CreateProductDialog />
       </div>
     </div>
   );
