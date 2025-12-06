@@ -69,18 +69,19 @@ export default function CreateProductDialog() {
         setOpen(false);
       },
       onError: (error: any) => {
-        if (error?.response?.data?.errors) {
-          error.response.data.errors.forEach(
-            (e: { field: string; message: string }) => {
-              form.setError(e.field as keyof CreateProductFormValues, {
-                type: 'server',
-                message: e.message,
-              });
-            }
-          );
-        } else {
-          toast.error('Failed to create product');
+        const backendErrors = error?.data?.errors;
+
+        if (backendErrors) {
+          backendErrors.forEach((e: { field: string; message: string }) => {
+            form.setError(e.field as keyof CreateProductFormValues, {
+              type: 'server',
+              message: e.message,
+            });
+          });
+          return;
         }
+
+        toast.error('Failed to create product');
       },
     });
   };
@@ -96,7 +97,6 @@ export default function CreateProductDialog() {
           <DialogTitle>Create New Product</DialogTitle>
         </DialogHeader>
 
-        {/* --- FORM STARTS HERE --- */}
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -122,7 +122,10 @@ export default function CreateProductDialog() {
             <div>
               <Label>Category</Label>
               <Select
-                onValueChange={(v) => form.setValue('category', v)}
+                onValueChange={(v) =>
+                  form.setValue('category', v, { shouldValidate: true })
+                }
+                value={form.watch('category')}
                 defaultValue=""
               >
                 <SelectTrigger>
@@ -163,8 +166,11 @@ export default function CreateProductDialog() {
             <div>
               <Label>Status</Label>
               <Select
+                value={form.watch('status')}
                 onValueChange={(v) =>
-                  form.setValue('status', v as 'Active' | 'Inactive')
+                  form.setValue('status', v as 'Active' | 'Inactive', {
+                    shouldValidate: true,
+                  })
                 }
                 defaultValue="Active"
               >
@@ -181,13 +187,24 @@ export default function CreateProductDialog() {
             <div>
               <Label>Price</Label>
               <Input type="number" {...form.register('price')} />
+
+              {form.formState.errors.price && (
+                <p className="text-red-500 text-sm">
+                  {form.formState.errors.price.message}
+                </p>
+              )}
             </div>
 
             <div>
               <Label>Stock Quantity</Label>
               <Input type="number" {...form.register('stock_quantity')} />
-            </div>
 
+              {form.formState.errors.stock_quantity && (
+                <p className="text-red-500 text-sm">
+                  {form.formState.errors.stock_quantity.message}
+                </p>
+              )}
+            </div>
             <div className="col-span-2">
               <Label>Description</Label>
               <Textarea {...form.register('description')} />
@@ -207,7 +224,6 @@ export default function CreateProductDialog() {
             </Button>
           </DialogFooter>
         </form>
-        {/* --- FORM ENDS HERE --- */}
       </DialogContent>
     </Dialog>
   );
