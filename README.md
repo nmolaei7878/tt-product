@@ -7,6 +7,8 @@ npm install
 npm run start
 ```
 
+#### Watch `localhost:3000`
+
 > you will need nodejs installed on your computer
 
 ## Structure (homepage)
