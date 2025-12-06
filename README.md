@@ -24,6 +24,20 @@ scattered files.
 - Local utils
 - i18n
 
+```
+src
+├── app
+│   ├── (home)
+│   │   ├── hooks
+│   │   ├── schemas
+│   │   ├── components
+│   │   ├── utils
+│   │   ├── i18n
+│   │   ├── page.tsx
+│   │   └── layout.tsx
+----------------------
+```
+
 ### Global Layer (`shared/`)
 
 This folder contains:
