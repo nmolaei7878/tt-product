@@ -31,7 +31,7 @@ export default function DeleteProductButton({ productId }: Props) {
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={(v) => setOpen(v)}>
       <DialogTrigger asChild>
         <Button className="w-full" variant="destructive" size="sm">
           Delete

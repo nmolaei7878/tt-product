@@ -35,8 +35,8 @@ export default function HomePage() {
   }
 
   return (
-    <div className="flex gap-4 p-4">
-      <div className="flex-1 max-w-xl space-y-4">
+    <div className="flex gap-4 p-10 m-auto w-full">
+      <div className="flex-1 w-full space-y-4">
         <Filters />
 
         <div className="grid grid-cols-2 gap-2">
