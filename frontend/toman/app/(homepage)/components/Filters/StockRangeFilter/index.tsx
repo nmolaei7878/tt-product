@@ -24,7 +24,7 @@ const StockRangeFilter: React.FC<Props> = ({ type }) => {
     <input
       type="number"
       placeholder={type === 'minStock' ? 'Min stock' : 'Max stock'}
-      className="border rounded px-2 py-1 flex-1"
+      className="border rounded px-2 py-1 my-1 flex-1"
       value={value}
       onChange={(e) => setValue(e.target.value)}
     />

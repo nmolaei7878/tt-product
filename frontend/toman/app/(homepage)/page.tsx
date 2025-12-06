@@ -35,15 +35,15 @@ export default function HomePage() {
   }
 
   return (
-    <div className="flex gap-4 p-10 m-auto w-full">
-      <div className="flex-1 w-full space-y-4">
+    <div className="flex w-full max-w-[1400px] mx-auto gap-6 p-6 h-[calc(100vh-2rem)]">
+      <div className="w-64  sticky top-6 h-fit">
         <Filters />
+      </div>
 
-        <div className="grid grid-cols-2 gap-2">
+      <div className="flex-1 overflow-y-auto space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
           {products.map((p) => (
-            <div key={p.id}>
-              <ListTile product={p} />
-            </div>
+            <ListTile key={p.id} product={p} />
           ))}
         </div>
 
@@ -52,7 +52,8 @@ export default function HomePage() {
           {!hasNextPage && <span>No more products</span>}
         </div>
       </div>
-      <div className="w-64">
+
+      <div className="w-64 sticky top-6 space-y-4 h-fit">
         <CategoryList />
         <CreateProductDialog />
       </div>

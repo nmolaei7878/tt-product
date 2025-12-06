@@ -24,7 +24,7 @@ const PriceRangeFilter: React.FC<Props> = ({ type }) => {
     <input
       type="number"
       placeholder={type === 'minPrice' ? 'Min price' : 'Max price'}
-      className="border rounded px-2 py-1 flex-1"
+      className="border rounded px-2 py-1 my-1 flex-1"
       value={value}
       onChange={(e) => setValue(e.target.value)}
     />

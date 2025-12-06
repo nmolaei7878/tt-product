@@ -7,14 +7,16 @@ const Filters = () => {
   return (
     <>
       <SearchFilter />
-      <StatusFilter />
+      <div className="mt-3">
+        <StatusFilter />
+      </div>
 
-      <div className="flex gap-2">
+      <div className="mt-3">
         <PriceRangeFilter type="minPrice" />
         <PriceRangeFilter type="maxPrice" />
       </div>
 
-      <div className="flex gap-2">
+      <div className="mt-3">
         <StockRangeFilter type="minStock" />
         <StockRangeFilter type="maxStock" />
       </div>

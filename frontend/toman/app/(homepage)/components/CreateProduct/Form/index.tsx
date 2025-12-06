@@ -27,7 +27,7 @@ export default function Form({
 
   return (
     <div className={className}>
-      <Label>{label}</Label>
+      <Label className="mb-3">{label}</Label>
 
       {textarea ? (
         <Textarea {...register(name)} />

@@ -15,7 +15,7 @@ export default function ProductStatusSelect() {
 
   return (
     <div>
-      <Label>Status</Label>
+      <Label className="mb-3">Status</Label>
 
       <Select
         value={watch('status')}

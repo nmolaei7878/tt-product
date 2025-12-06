@@ -17,7 +17,7 @@ export default function ProductCategorySelect() {
   const { data, isLoading } = useFetchCategory();
   return (
     <div>
-      <Label>Category</Label>
+      <Label className="mb-3">Category</Label>
 
       <Select
         value={watch('category')}
