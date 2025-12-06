@@ -1,5 +1,6 @@
 'use client';
 
+import useFetchCategory from '@/app/(homepage)/query/get-category';
 import { Label } from '@/components/ui/label';
 import {
   Select,
@@ -10,25 +11,10 @@ import {
 } from '@/components/ui/select';
 import { useFormContext } from 'react-hook-form';
 
-const categories = [
-  'Electronics',
-  'Clothing',
-  'Food & Beverages',
-  'Books',
-  'Home & Garden',
-  'Sports & Outdoors',
-  'Toys & Games',
-  'Beauty & Personal Care',
-  'Automotive',
-  'Office Supplies',
-  'Pet Supplies',
-  'Health & Wellness',
-];
-
 export default function ProductCategorySelect() {
   const { watch, setValue, formState } = useFormContext();
   const error = formState.errors.category?.message as string | undefined;
-
+  const { data, isLoading } = useFetchCategory();
   return (
     <div>
       <Label>Category</Label>
@@ -41,11 +27,18 @@ export default function ProductCategorySelect() {
           <SelectValue placeholder="Select category" />
         </SelectTrigger>
         <SelectContent>
-          {categories.map((c) => (
-            <SelectItem key={c} value={c}>
-              {c}
-            </SelectItem>
-          ))}
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              {data &&
+                data?.map((category) => (
+                  <SelectItem key={category.id} value={category.name}>
+                    {category.name}
+                  </SelectItem>
+                ))}
+            </>
+          )}
         </SelectContent>
       </Select>
 

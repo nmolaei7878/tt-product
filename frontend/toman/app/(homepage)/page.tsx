@@ -52,8 +52,6 @@ export default function HomePage() {
           {!hasNextPage && <span>No more products</span>}
         </div>
       </div>
-
-      {/* RIGHT SIDE – CATEGORIES */}
       <div className="w-64">
         <CategoryList />
         <CreateProductDialog />
