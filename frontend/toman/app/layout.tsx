@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Toaster } from 'sonner';
 import ReactQueryWrapper from '../_shared/components/wrappers/ReactQueryWrapper';
 import './globals.css';
@@ -10,10 +11,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ReactQueryWrapper>
-          <div>{children}</div>
-          <Toaster position="top-right" />
-        </ReactQueryWrapper>
+        <>
+          <div className="min-h-screen flex flex-col">
+            <Suspense fallback={<div className="p-4"></div>}>
+              <ReactQueryWrapper>
+                <>{children}</>
+                <Toaster position="top-right" />
+              </ReactQueryWrapper>
+            </Suspense>
+          </div>
+        </>
       </body>
     </html>
   );
