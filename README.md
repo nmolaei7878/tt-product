@@ -100,6 +100,10 @@ The application supports:
 - Axios
 - Modular folder architecture
 
+# Git
+
+> You can explore the full development progress and changes by viewing the Git commit history in this repository.
+
 # Screen Shot
 
 <img width="1460" height="750" src="https://github.com/user-attachments/assets/76a6b0fb-dcdd-47aa-bc31-ca3eac60f122" />
