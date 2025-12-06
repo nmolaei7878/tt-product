@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { ProductDto } from '../../query/get-product/types';
+import DeleteProductButton from '../DeleteButton';
 
 interface Props {
   product: ProductDto;
@@ -62,6 +63,7 @@ const ListTile: React.FC<Props> = ({ product }) => {
             </span>
           </div>
         </div>
+        <DeleteProductButton productId={product.id} />
       </div>
     </div>
   );
