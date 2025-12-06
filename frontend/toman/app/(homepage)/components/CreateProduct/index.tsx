@@ -69,8 +69,6 @@ export default function CreateProductDialog() {
         setOpen(false);
       },
       onError: (error: any) => {
-        // Example server errors
-        // error.response.data.errors = [{ field: 'product_name', message: '...' }, ...]
         if (error?.response?.data?.errors) {
           error.response.data.errors.forEach(
             (e: { field: string; message: string }) => {
@@ -89,9 +87,8 @@ export default function CreateProductDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      {/* button that opens the dialog */}
       <DialogTrigger asChild>
-        <Button>Create Product</Button>
+        <Button className="w-full mt-3 px-3">Create Product</Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-2xl">

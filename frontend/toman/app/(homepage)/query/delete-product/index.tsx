@@ -12,7 +12,6 @@ export const deleteProduct = async (id: number): Promise<void> => {
 
 export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
-
   return useMutation<void, ErrorResponse, number>({
     mutationFn: deleteProduct,
     onSuccess: () => {

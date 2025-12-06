@@ -18,7 +18,7 @@ const PriceRangeFilter: React.FC<Props> = ({ type }) => {
 
   useEffect(() => {
     if (debouncedValue !== initialValue) addSearchParam(type, debouncedValue);
-  }, [debouncedValue, addSearchParam, initialValue, type]);
+  }, [debouncedValue, initialValue, type]);
 
   return (
     <input

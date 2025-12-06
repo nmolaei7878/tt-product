@@ -29,5 +29,5 @@ export const useProductFilters = (): ProductPayload => {
         ? Number(searchParams.get('maxStock'))
         : undefined,
     };
-  }, [searchParams]); // memoize it
+  }, [searchParams]);
 };
