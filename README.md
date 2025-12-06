@@ -106,6 +106,12 @@ The application supports:
 
 > You can explore the full development progress and changes by viewing the Git commit history in this repository.
 
+# Architecture & Call Flow
+
+##### The architectural decision I made was that the code is written in a decoupled manner, and the filters operate independently of the list and the API. Through our custom hook, we send the filters to the URL, and on the other side, React Query, via another hook, reads all the URL filters. If there’s any change, it detects the update and calls the API again with the new filters.
+
+##### Our call flow is as follows: the page loads, and React Query reaches the hook we wrote, which then calls our async function. Within that async function, we use Axios. At the final layer, when the data returns, if there’s no error, it’s passed to the mapper. If there is an error, it’s converted into an error and returned. If the response is correct, the response is passed to the mapper, which then normalizes and processes it before returning it to us. This async function then hands the data back to the abstraction hook we created, and finally, it returns to the component and is rendered.
+
 # Screen Shot
 
 <img width="1460" height="750" src="https://github.com/user-attachments/assets/76a6b0fb-dcdd-47aa-bc31-ca3eac60f122" />
